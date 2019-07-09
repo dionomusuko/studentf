@@ -1,5 +1,5 @@
 <h1>編集</h1>
-<% if @student.errors.present? %>
+<% if @student.errors.any? %>
   <h3>エラーがあります</h3>
   <ul>
     <% @student.errors.full_messages.each do |msg| %>
