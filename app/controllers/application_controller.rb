@@ -8,9 +8,13 @@ class ApplicationController < ActionController::Base
   end
 
   def create
-    student = Student.new(student_id: params[:student][:student_id], name: params[:student][:name], mail: params[:student][:mail])
-    student.save
-    redirect_to '/'
+    @student = Student.new(student_id: params[:student][:student_id], name: params[:student][:name], mail: params[:student][:mail])
+    if @student.save
+      flash[:notice] = '1レコード追加しました!'
+      redirect_to '/'
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -23,18 +27,19 @@ class ApplicationController < ActionController::Base
     redirect_to '/'
   end
 
-  def update
-    student = Student.find(params[:id])
-    student_id = params[:student][:student_id]
-    name = params[:student][:name]
-    mail = params[:student][:mail]
-    student.update(student_id: student_id)
-    student.update(name: name)
-    student.update(mail: mail)
-    redirect_to '/'
-  end
-
   def edit
     @student = Student.find(params[:id])
   end
+
+  def update
+    student = Student.find(params[:id])
+    student.update(student_id: params[:student][:student_id], name: params[:student][:name], mail: params[:student][:mail])
+    if student.save
+      flash[:notice] = 'レコードを変更しました!'
+    redirect_to '/'
+    else
+      render 'edit'
+    end
+  end
+
 end

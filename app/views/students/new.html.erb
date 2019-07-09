@@ -1,10 +1,21 @@
 <h1>新規追加</h1>
-<%= form_for @student , url: {action: :create} do |f| %>
-  <%= f.label :student_id, '学籍番号' %>
-  <%= f.text_field :student_id %>
-  <%= f.label :name, '名前' %>
-  <%= f.text_field :name %>
-  <%= f.label :mail,  'メールアドレス' %>
-  <%= f.text_field :mail %>
-  <%= f.submit '変更' %>
+<% if @student.errors.present? %>
+  <h3>エラーがあります</h3>
+  <ul>
+    <% @student.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
 <% end %>
+  </ul>
+
+
+<p><%= form_for @student , url: {action: :create} do |f| %>
+  <%= f.label :student_id, '学籍番号：' %>
+    <%= f.text_field :student_id %></p>
+  <p><%= f.label :name, '名前：' %>
+    <%= f.text_field :name %></p>
+ <p> <%= f.label :mail,  'メールアドレス：' %>
+   <%= f.text_field :mail %></p>
+ <p> <%= f.submit '追加' %>
+<% end %>
+</p>
