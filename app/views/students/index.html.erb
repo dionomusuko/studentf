@@ -1,0 +1,11 @@
+<h1>学生情報</h1>
+<p><%  @students.each do |st| %>
+    <%=link_to st.name, "students/#{st.id}" %>
+    <%=link_to '削除', "students/#{st.id}", method: :delete %>
+    <%=link_to '編集', "students/#{st.id}/edit" %>
+    </p>
+  <% end %>
+    <p>
+      <%=link_to '新規追加', 'students/new' %>
+    </p>
+
